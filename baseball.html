@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+<style>
+    .containers{
+        width: 100%;
+        height: 800px;
+        background-color: white;
+        color:black;
+     }
+    table{
+        width: 900px;
+        height: 700px;
+        position: absolute;
+        top: 50px;
+        left: 300px;
+        border-collapse: collapse;
+        background-color: white;    
+    }
+    
+    th, td{
+        text-align: center;
+        padding: 5px;
+        font-size: 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .team-logo{
+        width: 25px;
+        height: 25px;
+        vertical-align: middle;
+    }
+    
+    h1{
+        position: absolute;
+        top: -10px;
+        left: 300px;
+    }
+
+    p{
+        position: absolute;
+        top: 10px;
+        right: 270px;
+    }
+    
+  
+
+
+    
+    
+
+
+    
+
+
+</style>
+</head>
+<body>
+    <div class="containers">
+        <h1>종합순위</h1>
+        <p>※2026년 3월 13일 기준</p>
+        <table>
+            <tr>
+                <th class="rank" style="background-color: #c5bfbf;">순위</th>
+                <th class="name" style="background-color: #c5bfbf;">팀</th>
+                <th class="game" style="background-color: #c5bfbf;">경기</th>
+                <th class="win" style="background-color:  #c5bfbf;">승</th>
+                <th class="draw" style="background-color: #c5bfbf;">무</th>
+                <th class="loss" style="background-color: #c5bfbf;">패</th>
+                <th class="wpct" style="background-color: #c5bfbf;">승률</th>
+                <th class="gb" style="background-color:   #c5bfbf;">게임차</th>
+                <th class="streak" style="background-color: #c5bfbf;">연속</th>
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+
+
+<script>
+const jsonUrl = 'https://prof-jwchi.github.io/kopo-front2026/Json/baseball.json';
+// Ajax를 사용하여 JSON 파일 가져오기
+    var request= new XMLHttpRequest();
+request.open("GET", jsonUrl);
+request.responseType = "json";
+request.send();
+request.addEventListener('load',()=>{
+console.log(request.response);
+})
+let table = document.querySelector("table");
+
+let jsonData =[
+  {"rank":1,"name":"LG","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/LG_300300.png","game":144,"win":85,"draw":3,"loss":56,"wpct":0.603,"gb":0.0,"streak":"3패"},
+  {"rank":2,"name":"한화","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/HH_300300.png","game":144,"win":83,"draw":4,"loss":57,"wpct":0.593,"gb":1.5,"streak":"1패"},
+  {"rank":3,"name":"SSG","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/SK_300300.png","game":144,"win":75,"draw":4,"loss":65,"wpct":0.536,"gb":9.5,"streak":"2패"},
+  {"rank":4,"name":"삼성","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/SS_300300.png","game":144,"win":74,"draw": 2,"loss":68,"wpct":0.521,"gb":"11.5","streak":"1패"},
+  {"rank":5,"name":"NC","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/NC_300300.png","game":144,"win": 71,"draw": 6,"loss":67,"wpct":0.514,"gb":"12.5","streak":"9승"},
+  {"rank":6,"name":"KT","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/KT_300300.png","game":144,"win": 71,"draw": 5, "loss":68,"wpct":0.511,"gb":"13.0","streak":"1승"},
+  {"rank":7,"name":"롯데","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/LT_300300.png","game":144,"win":66,"draw":6,"loss":72,"wpct":0.478,"gb":"17.5","streak":"3패"},
+  {"rank":8,"name":"KIA","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/HT_300300.png","game":144,"win": 66,"draw": 6,"loss":72,"wpct":0.478,"gb":"17.5","streak":"3패"},
+  {"rank":9,"name":"두산","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/OB_300300.png","game":144,"win":65,"draw":4,"loss":75,"wpct":0.464,"gb":"19.5","streak":"2승"}, 
+  {"rank":10,"name":"키움","logo":"http://t1.daumcdn.net/media/img-section/sports13/logo/team/1/WO_300300.png","game":144,"win":47,"draw":4,"loss":93,"wpct":0.336,"gb":"37.5","streak":"5패"}
+];
+
+let parsedData=jsonData;
+console.log(parsedData.length); 
+parsedData.forEach((item) => {
+table.innerHTML += `
+<tr>
+    <td class="rank">${item.rank}</td>
+    <td class="name"><img class="team-logo" src="${item.logo}" alt="${item.name}"> ${item.name}</td>
+    <td class="game">${item.game}</td>
+    <td class="win">${item.win}</td>
+    <td class="draw">${item.draw}</td>
+    <td class="loss">${item.loss}</td>
+    <td class="wpct">${item.wpct}</td>
+    <td class="gb">${item.gb}</td>
+    <td class="streak">${item.streak}</td>
+</tr>`;
+});
+
+ </script>
+</body>
+</html>
